@@ -3,9 +3,9 @@ defmodule Taglet.Tag do
   import Ecto.Changeset
 
   schema "tags" do
-    field :name, :string, null: false
+    field(:name, :string, null: false)
 
-    has_many :taggings, Taglet.Tagging
+    has_many(:taggings, Taglet.Tagging)
   end
 
   def changeset(struct, params \\ %{}) do

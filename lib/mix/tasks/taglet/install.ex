@@ -6,24 +6,26 @@ defmodule Mix.Tasks.Taglet.Install do
   import Mix.Tasks.Taglet.Utils, only: [timestamp: 0]
 
   def run(_args) do
-    path = Path.relative_to("priv/repo/migrations", Mix.Project.app_path)
+    path = Path.relative_to("priv/repo/migrations", Mix.Project.app_path())
     tag_file = Path.join(path, "#{timestamp()}_create_tag.exs")
     tagging_file = Path.join(path, "#{timestamp()}_create_tagging.exs")
-    create_directory path
+    taggable_id_type = Application.get_env(:taglet, :taggable_id, :integer)
+    create_directory(path)
 
-    create_file tag_file, """
+    create_file(tag_file, """
     defmodule Repo.Migrations.CreateTag do
       use Ecto.Migration
 
       def change do
         create table(:tags) do
           add :name, :string, null: false
+          add :taggings_count, :integer, default: 0
         end
       end
     end
-    """
+    """)
 
-    create_file tagging_file, """
+    create_file(tagging_file, """
     defmodule Repo.Migrations.CreateTagging do
       use Ecto.Migration
 
@@ -31,8 +33,11 @@ defmodule Mix.Tasks.Taglet.Install do
         create table(:taggings) do
           add :tag_id, references(:tags, on_delete: :delete_all)
 
-          add :taggable_id,      :integer
+          add :taggable_id,      :#{taggable_id_type}
           add :taggable_type,    :string, null: false
+
+          add :tagger_id, :#{taggable_id_type}
+          add :tagger_type, :string
 
           add :context, :string, null: false, default: "tag"
 
@@ -43,6 +48,6 @@ defmodule Mix.Tasks.Taglet.Install do
         create index(:taggings, [:taggable_id, :taggable_type, :context])
       end
     end
-    """
+    """)
   end
 end

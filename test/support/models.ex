@@ -6,8 +6,8 @@ defmodule TagletPost do
   import Ecto.Changeset
 
   schema "posts" do
-    field :title, :string
-    field :body, :boolean
+    field(:title, :string)
+    field(:body, :boolean)
 
     timestamps()
   end
@@ -18,4 +18,3 @@ defmodule TagletPost do
     |> validate_required([:title])
   end
 end
-
