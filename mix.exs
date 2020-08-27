@@ -15,7 +15,7 @@ defmodule Taglet.Mixfile do
       # Docs
       name: "Taglet",
       description: description(),
-      source_url: "https://github.com/bizneo/taglet",
+      source_url: "https://github.com/GoCorus/taglet",
       docs: [main: "Taglet", extras: ["README.md"]]
     ]
   end
@@ -50,10 +50,10 @@ defmodule Taglet.Mixfile do
     [
       name: :taglet,
       files: ["lib", "mix.exs", "README*", "LICENSE*"],
-      maintainers: ["itsquall", "abmm", "dreamingechoes"],
+      maintainers: ["itsquall", "abmm", "dreamingechoes", "Wojnar"],
       licenses: ["Apache License 2.0"],
       links: %{
-        "GitHub" => "https://github.com/bizneo/taglet",
+        "GitHub" => "https://github.com/GoCorus/taglet",
         "Docs" => "https://hexdocs.pm/taglet/Taglet.html"
       }
     ]

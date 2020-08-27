@@ -1,7 +1,5 @@
 # Taglet
 
-[![CircleCI](https://circleci.com/gh/bizneo/taglet/tree/master.svg?style=svg)](https://circleci.com/gh/bizneo/taglet/tree/master)
-
 Taglet allows you to manage tags associated to your records.
 
 It also allows you to specify various contexts
@@ -12,7 +10,7 @@ It also allows you to specify various contexts
 
   ```elixir
   def deps do
-    [{:taglet, "~> 0.6.0"}]
+    [{:taglet, git: "https://github.com/GoCorus/taglet.git"}]
   end
   ```
 
