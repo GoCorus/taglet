@@ -249,5 +249,5 @@ defmodule Taglet do
     |> TagletQuery.search_tagged_with(tags, context, taggable_type(schema))
   end
 
-  defp taggable_type(module), do: module |> Module.split() |> List.last()
+  defp taggable_type(module), do: module.__schema__(:source)
 end
