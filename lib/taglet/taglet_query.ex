@@ -60,10 +60,7 @@ defmodule Taglet.TagletQuery do
   Build the query to get all Tags of a tag_resource and context.
   """
   def get_tags_association(struct, tag_resource, context) do
-    taggable_type =
-      struct.__struct__
-      |> Module.split()
-      |> List.last()
+    taggable_type = struct.__meta__.source
 
     case struct.id do
       nil -> get_all_tags(tag_resource, taggable_type, context)
