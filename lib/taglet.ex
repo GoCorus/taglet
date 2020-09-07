@@ -65,7 +65,7 @@ defmodule Taglet do
       taggable_type: struct.__struct__ |> taggable_type,
       context: context,
       tag_id: tag_resource.id,
-      inserted_at: DateTime.utc_now
+      inserted_at: NaiveDateTime.utc_now()
     }
   end
 
