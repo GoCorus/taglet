@@ -243,8 +243,6 @@ defmodule Taglet do
   end
 
   defp do_tags_search(queryable, tags, context) do
-    %{from: {_source, schema}} = Ecto.Queryable.to_query(queryable)
-
     queryable
     |> TagletQuery.search_tagged_with(tags, context, taggable_type(schema))
   end
