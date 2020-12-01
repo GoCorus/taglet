@@ -244,7 +244,7 @@ defmodule Taglet do
 
   defp do_tags_search(queryable, tags, context) do
     queryable
-    |> TagletQuery.search_tagged_with(tags, context, taggable_type(schema))
+    |> TagletQuery.search_tagged_with(tags, context, taggable_type(queryable))
   end
 
   defp taggable_type(module), do: module.__schema__(:source)
