@@ -242,6 +242,7 @@ defmodule Taglet do
     do_tags_search(query, tags, context)
   end
 
+  # TODO: multiple tags
   defp do_tags_search(queryable, tags, context) do
     %{from: %{ source: {_, schema}}} = Ecto.Queryable.to_query(queryable)
 
