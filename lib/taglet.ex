@@ -198,10 +198,14 @@ defmodule Taglet do
   def tag_list_queryable(taggable, context \\ "tags")
 
   def tag_list_queryable(struct, context) when is_map(struct) do
-    id = struct.id
-    type = struct.__struct__ |> taggable_type
+    id = Map.get(struct, :id)
 
-    TagletQuery.search_tags(context, type, id)
+    if !is_nil(id) do
+      type = struct.__struct__ |> taggable_type()
+      TagletQuery.search_tags(context, type, id)
+    else
+      []
+    end
   end
 
   def tag_list_queryable(model, context) do
@@ -243,7 +247,7 @@ defmodule Taglet do
   end
 
   defp do_tags_search(queryable, tags, context) do
-    %{from: %{ source: {_, schema}}} = Ecto.Queryable.to_query(queryable)
+    %{from: %{source: {_, schema}}} = Ecto.Queryable.to_query(queryable)
 
     queryable
     |> TagletQuery.search_tagged_with(tags, context, taggable_type(schema))
