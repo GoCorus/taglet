@@ -198,13 +198,11 @@ defmodule Taglet do
   def tag_list_queryable(taggable, context \\ "tags")
 
   def tag_list_queryable(struct, context) when is_map(struct) do
-    id = Map.get(struct, :id)
-
-    if !is_nil(id) do
+    if Map.has_key?(struct, :id) and Map.has_key?(struct, :__struct__) do
       type = struct.__struct__ |> taggable_type()
+      id = Map.get(struct, :id)
+
       TagletQuery.search_tags(context, type, id)
-    else
-      []
     end
   end
 
